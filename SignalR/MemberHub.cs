@@ -19,9 +19,26 @@ public class MemberHub : Hub
         await base.OnDisconnectedAsync(exception);
     }
     
-    public static void UpdateActiveMembersList(List<Guid> newActiveMembers)
+    public static void AddActiveMember(Guid activeMember)
+    {
+        ActiveMembers.Add(activeMember);
+    }
+
+    public static void DeleteActiveMember(Guid memberId)
+    {
+        if (!ActiveMembers.Contains(memberId))
+            throw new KeyNotFoundException("memberId not found in active members!");
+
+        ActiveMembers.Remove(memberId);
+    }
+
+    public static void DeleteAllActiveMembers()
     {
         ActiveMembers.Clear();
-        ActiveMembers.AddRange(newActiveMembers);
+    }
+
+    public static List<Guid> GetActiveMemberList()
+    {
+        return ActiveMembers;
     }
 }
