@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());
-})
+});
 
 builder.Services.AddHostedService<ActiveMemberBackgroundService>();
 
