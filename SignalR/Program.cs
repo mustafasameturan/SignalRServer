@@ -14,10 +14,11 @@ builder.Services.AddSignalR();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder => builder
-        .AllowAnyOrigin()
+        .WithOrigins("http://localhost:5173")
         .AllowAnyMethod()
-        .AllowAnyHeader());
-});
+        .AllowAnyHeader()
+        .AllowCredentials());
+})
 
 builder.Services.AddHostedService<ActiveMemberBackgroundService>();
 
