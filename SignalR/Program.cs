@@ -14,10 +14,9 @@ builder.Services.AddSignalR();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder => builder
-        .WithOrigins("http://localhost:5173")
+        .AllowAnyOrigin()
         .AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials());
+        .AllowAnyHeader());
 });
 
 builder.Services.AddHostedService<ActiveMemberBackgroundService>();
@@ -26,12 +25,9 @@ var app = builder.Build();
 
 app.UseCors("CorsPolicy");
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
